@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.voice-briefing]
 verify_jwt = false
+
+[functions.agent-network]
+verify_jwt = false
