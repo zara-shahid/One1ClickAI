@@ -1,0 +1,4 @@
+project_id = "dviqpivjjfmvbryjpxwp"
+
+[functions.analyze-supply-chain]
+verify_jwt = false
