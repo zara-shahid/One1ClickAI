@@ -7,7 +7,6 @@
 
 A web-based supply chain intelligence platform that transforms raw sales and inventory data into actionable business insights instantly. Make complex supply chain decisions with a single click, reducing decision time from hours to seconds.
 
-![One-Click AI Dashboard](https://via.placeholder.com/800x400?text=Dashboard+Preview)
 
 ## 🎯 Problem Statement
 
@@ -153,16 +152,6 @@ Widget B,2024-01-15,85,49.99,120,150
 Widget C,2024-01-16,200,19.99,180,250
 ```
 
-## 📸 Screenshots
-
-### Dashboard Overview
-![Dashboard](https://via.placeholder.com/800x400?text=Dashboard+Overview)
-
-### AI Insights
-![AI Insights](https://via.placeholder.com/800x400?text=AI+Insights)
-
-### Recommendations Table
-![Recommendations](https://via.placeholder.com/800x400?text=Recommendations+Table)
 
 ## 🎯 Target Audience
 
@@ -204,8 +193,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Team
 
-**Zeeshan** - Project Lead & Full-Stack Developer  
-[GitHub](https://github.com/yourusername) | [LinkedIn](https://linkedin.com/in/yourprofile)
+**Zara Shahid** - Project Lead & Full-Stack Developer  
+**Sam** - Ai Engineer 
+[GitHub](https://github.com/zara-shahid) | [LinkedIn](https://linkedin.com/in/zarashahid123)
 
 ## 🙏 Acknowledgments
 
@@ -216,9 +206,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 For questions, issues, or feature requests:
-- 📧 Email: support@oneclickai.com
-- 💬 GitHub Issues: [Create an issue](https://github.com/yourusername/one-click-ai/issues)
-- 📖 Documentation: [Wiki](https://github.com/yourusername/one-click-ai/wiki)
+- 📧 Email: zarashahid444@gmail.com
+- 💬 GitHub Issues: [Create an issue](https://github.com/zara-shahid/One1ClickAI/issues)
+- 📖 Documentation: [Wiki](https://github.com/zara-shahid/One1ClickAI/wiki)
 
 ---
 
