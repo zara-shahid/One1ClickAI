@@ -1,12 +1,13 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { LayoutDashboard, Upload, Brain, History, LogOut, Zap, Info } from "lucide-react";
+import { LayoutDashboard, Upload, Brain, History, LogOut, Zap, Info, Network } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { to: "/", icon: LayoutDashboard, label: "Dashboard" },
   { to: "/upload", icon: Upload, label: "Upload Data" },
   { to: "/insights", icon: Brain, label: "AI Insights" },
+  { to: "/agents", icon: Network, label: "Agent Network" },
   { to: "/history", icon: History, label: "History" },
   { to: "/about", icon: Info, label: "About" },
 ];

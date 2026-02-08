@@ -14,6 +14,47 @@ export type Database = {
   }
   public: {
     Tables: {
+      agent_messages: {
+        Row: {
+          content: Json
+          created_at: string
+          from_agent: string
+          id: string
+          message_type: string
+          session_id: string
+          to_agent: string
+          user_id: string
+        }
+        Insert: {
+          content?: Json
+          created_at?: string
+          from_agent: string
+          id?: string
+          message_type?: string
+          session_id: string
+          to_agent: string
+          user_id: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          from_agent?: string
+          id?: string
+          message_type?: string
+          session_id?: string
+          to_agent?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agent_messages_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "coordination_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       ai_insights: {
         Row: {
           created_at: string
@@ -63,6 +104,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      coordination_sessions: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          id: string
+          report: Json | null
+          status: string
+          trigger_type: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          report?: Json | null
+          status?: string
+          trigger_type?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          report?: Json | null
+          status?: string
+          trigger_type?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       sales_data: {
         Row: {

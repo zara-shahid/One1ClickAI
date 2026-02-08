@@ -12,6 +12,7 @@ import Upload from "@/pages/Upload";
 import Insights from "@/pages/Insights";
 import UploadHistory from "@/pages/UploadHistory";
 import About from "@/pages/About";
+import AgentNetwork from "@/pages/AgentNetwork";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
               <Route path="/upload" element={<Upload />} />
               <Route path="/insights" element={<Insights />} />
               <Route path="/history" element={<UploadHistory />} />
+              <Route path="/agents" element={<AgentNetwork />} />
               <Route path="/about" element={<About />} />
             </Route>
             <Route path="*" element={<NotFound />} />
