@@ -117,9 +117,15 @@ export default function UploadPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Upload Data</h1>
-        <p className="text-muted-foreground">Import your sales and inventory CSV data</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold">Upload Data</h1>
+          <p className="text-muted-foreground">Import your sales and inventory CSV data</p>
+        </div>
+        <a href="/sample-supply-chain-data.csv" download className="inline-flex items-center gap-2 rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground hover:bg-secondary/80 transition-colors">
+          <FileText className="h-4 w-4" />
+          Download Sample CSV
+        </a>
       </div>
 
       {/* Drop zone */}
