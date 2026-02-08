@@ -28,14 +28,14 @@ const steps = [
 
 export default function AboutPage() {
   return (
-    <div className="space-y-8 max-w-4xl">
+    <div className="space-y-8 max-w-4xl animate-in-fade">
       {/* Hero */}
-      <div>
+      <div className="border-b border-border/60 pb-8">
         <div className="flex items-center gap-3 mb-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-            <Zap className="h-5 w-5" />
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20">
+            <Zap className="h-6 w-6" />
           </div>
-          <h1 className="text-3xl font-bold">One-Click AI</h1>
+          <h1 className="text-3xl font-bold tracking-tight">One-Click AI</h1>
         </div>
         <p className="text-lg text-muted-foreground">Supply Chain Decision Engine</p>
         <p className="mt-3 text-muted-foreground leading-relaxed">
@@ -46,7 +46,7 @@ export default function AboutPage() {
 
       {/* Problem / Solution */}
       <div className="grid gap-4 sm:grid-cols-2">
-        <Card className="ring-1 ring-critical/20">
+        <Card className="ring-1 ring-critical/20 transition-shadow hover:shadow-md">
           <CardHeader>
             <CardTitle className="text-base text-critical">The Problem</CardTitle>
           </CardHeader>
@@ -56,7 +56,7 @@ export default function AboutPage() {
             <p>Late decisions lead to lost revenue, excess inventory, and supply disruptions.</p>
           </CardContent>
         </Card>
-        <Card className="ring-1 ring-success/20">
+        <Card className="ring-1 ring-success/20 transition-shadow hover:shadow-md">
           <CardHeader>
             <CardTitle className="text-base text-success">Our Solution</CardTitle>
           </CardHeader>
@@ -70,11 +70,11 @@ export default function AboutPage() {
 
       {/* Key Features */}
       <Card>
-        <CardHeader><CardTitle className="text-base">Key Features</CardTitle></CardHeader>
+        <CardHeader className="pb-2"><CardTitle className="text-base font-semibold">Key Features</CardTitle></CardHeader>
         <CardContent>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {features.map(f => (
-              <div key={f.title} className="flex items-start gap-3">
+              <div key={f.title} className="flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-muted/40">
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <f.icon className="h-4 w-4" />
                 </div>

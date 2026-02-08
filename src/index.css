@@ -32,7 +32,7 @@
     --input: 214 32% 91%;
     --ring: 217 91% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.625rem;
 
     --success: 152 60% 42%;
     --success-foreground: 0 0% 100%;
@@ -116,6 +116,23 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .animate-in-fade {
+    animation: fadeIn 0.3s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
 }

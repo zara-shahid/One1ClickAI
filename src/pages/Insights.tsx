@@ -72,36 +72,49 @@ export default function InsightsPage() {
     return "bg-success/10 text-success";
   };
 
-  if (loading) return <div className="flex items-center justify-center py-20 text-muted-foreground">Loading...</div>;
+  if (loading) {
+    return (
+      <div className="space-y-6 animate-in-fade">
+        <div className="h-10 w-48 rounded-lg bg-muted animate-pulse" />
+        <div className="h-64 rounded-xl border bg-card animate-pulse" />
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 animate-in-fade">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border/60 pb-6">
         <div>
-          <h1 className="text-2xl font-bold">AI Insights</h1>
-          <p className="text-muted-foreground">AI-powered supply chain recommendations</p>
+          <h1 className="text-2xl font-bold tracking-tight">AI Insights</h1>
+          <p className="mt-0.5 text-muted-foreground">AI-powered supply chain recommendations</p>
         </div>
-        <Button onClick={runAnalysis} disabled={analyzing} className="gap-2">
+        <Button onClick={runAnalysis} disabled={analyzing} className="gap-2 rounded-lg shadow-sm">
           {analyzing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Brain className="h-4 w-4" />}
           {analyzing ? "Analyzing..." : "One-Click Analysis"}
         </Button>
       </div>
 
       {insights.length === 0 ? (
-        <Card>
-          <CardContent className="flex flex-col items-center justify-center py-16 text-center">
-            <Brain className="mb-4 h-12 w-12 text-muted-foreground/40" />
-            <h3 className="text-lg font-semibold">No insights yet</h3>
-            <p className="mt-1 text-sm text-muted-foreground">Upload data and click "One-Click Analysis" to generate AI insights</p>
+        <Card className="overflow-hidden border-dashed">
+          <CardContent className="flex flex-col items-center justify-center py-20 text-center">
+            <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <Brain className="h-10 w-10" />
+            </div>
+            <h3 className="text-xl font-semibold">No insights yet</h3>
+            <p className="mt-2 max-w-sm text-sm text-muted-foreground">Upload data, then click "One-Click Analysis" to generate AI insights and recommendations.</p>
+            <Button className="mt-6 rounded-lg" asChild>
+              <a href="/upload">Go to Upload</a>
+            </Button>
           </CardContent>
         </Card>
       ) : (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Product Analysis</CardTitle>
+        <Card className="overflow-hidden">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base font-semibold">Product Analysis</CardTitle>
             <CardDescription>{insights.length} products analyzed</CardDescription>
           </CardHeader>
           <CardContent>
+            <div className="rounded-xl border overflow-hidden">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -116,7 +129,7 @@ export default function InsightsPage() {
               <TableBody>
                 {insights.map(row => (
                   <>
-                    <TableRow key={row.id} className="cursor-pointer" onClick={() => toggleExpand(row.id)}>
+                    <TableRow key={row.id} className="cursor-pointer transition-colors hover:bg-muted/50" onClick={() => toggleExpand(row.id)}>
                       <TableCell className="font-medium">{row.product_name}</TableCell>
                       <TableCell>
                         <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusColor(row.status)}`}>
@@ -142,6 +155,7 @@ export default function InsightsPage() {
                 ))}
               </TableBody>
             </Table>
+            </div>
           </CardContent>
         </Card>
       )}

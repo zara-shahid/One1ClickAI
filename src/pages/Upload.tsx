@@ -116,13 +116,13 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 animate-in-fade">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border/60 pb-6">
         <div>
-          <h1 className="text-2xl font-bold">Upload Data</h1>
-          <p className="text-muted-foreground">Import your sales and inventory CSV data</p>
+          <h1 className="text-2xl font-bold tracking-tight">Upload Data</h1>
+          <p className="mt-0.5 text-muted-foreground">Import your sales and inventory CSV data</p>
         </div>
-        <a href="/sample-supply-chain-data.csv" download className="inline-flex items-center gap-2 rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground hover:bg-secondary/80 transition-colors">
+        <a href="/sample-supply-chain-data.csv" download className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2.5 text-sm font-medium shadow-sm transition-colors hover:bg-muted/50">
           <FileText className="h-4 w-4" />
           Download Sample CSV
         </a>
@@ -130,24 +130,26 @@ export default function UploadPage() {
 
       {/* Drop zone */}
       <Card
-        className={`cursor-pointer border-2 border-dashed transition-colors ${dragActive ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"}`}
+        className={`cursor-pointer border-2 border-dashed transition-all duration-200 ${dragActive ? "border-primary bg-primary/5 scale-[1.01]" : "border-border hover:border-primary/50 hover:bg-muted/30"}`}
         onDragOver={e => { e.preventDefault(); setDragActive(true); }}
         onDragLeave={() => setDragActive(false)}
         onDrop={handleDrop}
         onClick={() => document.getElementById("csv-input")?.click()}
       >
-        <CardContent className="flex flex-col items-center justify-center py-12">
-          <UploadIcon className="mb-4 h-10 w-10 text-muted-foreground" />
-          <p className="text-lg font-medium">Drag & drop your CSV file here</p>
-          <p className="text-sm text-muted-foreground">or click to browse</p>
+        <CardContent className="flex flex-col items-center justify-center py-14">
+          <div className={`mb-4 flex h-16 w-16 items-center justify-center rounded-2xl transition-colors ${dragActive ? "bg-primary/20 text-primary" : "bg-muted text-muted-foreground"}`}>
+            <UploadIcon className="h-8 w-8" />
+          </div>
+          <p className="text-lg font-semibold">Drag & drop your CSV file here</p>
+          <p className="mt-1 text-sm text-muted-foreground">or click to browse</p>
           <input id="csv-input" type="file" accept=".csv" className="hidden" onChange={e => { if (e.target.files?.[0]) processFile(e.target.files[0]); }} />
         </CardContent>
       </Card>
 
       {/* Expected format */}
       <Card>
-        <CardHeader>
-          <CardTitle className="text-base flex items-center gap-2"><FileText className="h-4 w-4" /> Expected CSV Format</CardTitle>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-base font-semibold flex items-center gap-2"><FileText className="h-4 w-4 text-primary" /> Expected CSV Format</CardTitle>
           <CardDescription>Your CSV should have these columns:</CardDescription>
         </CardHeader>
         <CardContent>
@@ -176,17 +178,17 @@ export default function UploadPage() {
       {/* Preview */}
       {rows.length > 0 && (
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <div>
-              <CardTitle className="text-base flex items-center gap-2"><CheckCircle className="h-4 w-4 text-success" /> Data Preview</CardTitle>
+              <CardTitle className="text-base font-semibold flex items-center gap-2"><CheckCircle className="h-4 w-4 text-success" /> Data Preview</CardTitle>
               <CardDescription>{rows.length} rows parsed from {file?.name}</CardDescription>
             </div>
-            <Button onClick={handleUpload} disabled={uploading}>
+            <Button onClick={handleUpload} disabled={uploading} className="rounded-lg shadow-sm">
               {uploading ? "Uploading..." : `Import ${rows.length} Rows`}
             </Button>
           </CardHeader>
           <CardContent>
-            <div className="max-h-80 overflow-auto rounded-md border">
+            <div className="max-h-80 overflow-auto rounded-xl border">
               <Table>
                 <TableHeader>
                   <TableRow>

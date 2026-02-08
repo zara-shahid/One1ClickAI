@@ -7,14 +7,39 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Production
 dist
 dist-ssr
+build
 *.local
+
+# Environment variables - CRITICAL FOR SECURITY
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# Supabase
+supabase/.branches
+supabase/.temp
+supabase/functions/.cache
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
 .idea
 .DS_Store
 *.suo
@@ -22,3 +47,33 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+*.swp
+*~
+
+# OS files
+Thumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDEs
+*.sublime-project
+*.sublime-workspace
+.history/
+*.code-workspace
+
+# Temporary files
+*.tmp
+*.temp
+.cache
+.parcel-cache
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Misc
+.turbo
+.vercel
+.netlify

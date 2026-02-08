@@ -32,7 +32,39 @@ export default function Dashboard() {
     load();
   }, [user]);
 
-  if (loading) return <div className="flex items-center justify-center py-20 text-muted-foreground">Loading dashboard...</div>;
+  if (loading) {
+    return (
+      <div className="space-y-6 animate-in-fade">
+        <div className="flex items-center justify-between">
+          <div className="space-y-1">
+            <div className="h-8 w-48 rounded-lg bg-muted animate-pulse" />
+            <div className="h-4 w-32 rounded bg-muted/60 animate-pulse" />
+          </div>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="rounded-xl border bg-card p-5">
+              <div className="flex items-center gap-4">
+                <div className="h-10 w-10 rounded-lg bg-muted animate-pulse" />
+                <div className="space-y-2">
+                  <div className="h-3 w-20 rounded bg-muted animate-pulse" />
+                  <div className="h-7 w-14 rounded bg-muted animate-pulse" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-xl border bg-card p-6 h-80 flex items-center justify-center">
+            <div className="h-6 w-32 rounded bg-muted animate-pulse" />
+          </div>
+          <div className="rounded-xl border bg-card p-6 h-80 flex items-center justify-center">
+            <div className="h-6 w-32 rounded bg-muted animate-pulse" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const products = [...new Set(salesData.map(r => r.product_name))];
   const totalProducts = products.length;
@@ -117,14 +149,14 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 animate-in-fade">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border/60 pb-6">
         <div>
-          <h1 className="text-2xl font-bold">Dashboard</h1>
-          <p className="text-muted-foreground">Supply chain overview at a glance</p>
+          <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
+          <p className="mt-0.5 text-muted-foreground">Supply chain overview at a glance</p>
         </div>
         {insights.length > 0 && (
-          <Button variant="outline" onClick={playVoiceBriefing} disabled={speaking} className="gap-2">
+          <Button variant="outline" onClick={playVoiceBriefing} disabled={speaking} className="gap-2 rounded-lg shadow-sm">
             {speaking ? <Loader2 className="h-4 w-4 animate-spin" /> : <Volume2 className="h-4 w-4" />}
             {speaking ? "Speaking..." : "Voice Briefing"}
           </Button>
@@ -146,18 +178,28 @@ export default function Dashboard() {
       </div>
 
       {isEmpty ? (
-        <Card>
-          <CardContent className="flex flex-col items-center justify-center py-16 text-center">
-            <Package className="mb-4 h-12 w-12 text-muted-foreground/40" />
-            <h3 className="text-lg font-semibold">No data yet</h3>
-            <p className="mt-1 text-sm text-muted-foreground">Upload a CSV file to see your supply chain dashboard</p>
+        <Card className="overflow-hidden border-dashed">
+          <CardContent className="flex flex-col items-center justify-center py-20 text-center">
+            <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <Package className="h-10 w-10" />
+            </div>
+            <h3 className="text-xl font-semibold">No data yet</h3>
+            <p className="mt-2 max-w-sm text-sm text-muted-foreground">
+              Upload a CSV file to see your supply chain dashboard, charts, and AI insights.
+            </p>
+            <Button className="mt-6 rounded-lg" asChild>
+              <a href="/upload">Upload your first file</a>
+            </Button>
           </CardContent>
         </Card>
       ) : (
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Sales Trend */}
-          <Card>
-            <CardHeader><CardTitle className="text-base">Sales Trend</CardTitle></CardHeader>
+          <Card className="overflow-hidden">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base font-semibold">Sales Trend</CardTitle>
+              <p className="text-xs text-muted-foreground">Quantity sold over time</p>
+            </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={280}>
                 <LineChart data={salesTrend}>
@@ -172,8 +214,11 @@ export default function Dashboard() {
           </Card>
 
           {/* Inventory Health */}
-          <Card>
-            <CardHeader><CardTitle className="text-base">Inventory Health</CardTitle></CardHeader>
+          <Card className="overflow-hidden">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base font-semibold">Inventory Health</CardTitle>
+              <p className="text-xs text-muted-foreground">Current stock vs reorder point</p>
+            </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={280}>
                 <BarChart data={latestStock}>
@@ -190,15 +235,18 @@ export default function Dashboard() {
           </Card>
 
           {/* Recommended Actions */}
-          <Card className="lg:col-span-2">
-            <CardHeader><CardTitle className="text-base">Recommended Actions</CardTitle></CardHeader>
+          <Card className="lg:col-span-2 overflow-hidden">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base font-semibold">Recommended Actions</CardTitle>
+              <p className="text-xs text-muted-foreground">Top priorities from AI analysis</p>
+            </CardHeader>
             <CardContent>
               {topActions.length === 0 ? (
                 <p className="text-sm text-muted-foreground">No risk alerts. Run AI analysis from the Insights page to detect risks.</p>
               ) : (
                 <div className="space-y-3">
                   {topActions.map(alert => (
-                    <div key={alert.id} className="flex items-start gap-3 rounded-lg border p-4">
+                    <div key={alert.id} className="flex items-start gap-3 rounded-xl border bg-card/50 p-4 transition-colors hover:bg-muted/30">
                       <div className={`mt-0.5 h-2.5 w-2.5 rounded-full shrink-0 ${alert.status === "critical" ? "bg-critical" : "bg-warning"}`} />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
@@ -231,23 +279,23 @@ export default function Dashboard() {
   );
 }
 
-function KpiCard({ icon: Icon, label, value }: { icon: any; label: string; value: string | number }) {
+function KpiCard({ icon: Icon, label, value }: { icon: React.ElementType; label: string; value: string | number }) {
   return (
-    <Card>
+    <Card className="transition-all duration-200 hover:shadow-md">
       <CardContent className="flex items-center gap-4 p-5">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
           <Icon className="h-5 w-5" />
         </div>
-        <div>
-          <p className="text-sm text-muted-foreground">{label}</p>
-          <p className="text-xl font-bold">{value}</p>
+        <div className="min-w-0">
+          <p className="text-sm font-medium text-muted-foreground">{label}</p>
+          <p className="text-xl font-bold tracking-tight">{value}</p>
         </div>
       </CardContent>
     </Card>
   );
 }
 
-function StatusCard({ icon: Icon, label, count, status }: { icon: any; label: string; count: number; status: "critical" | "warning" | "success" }) {
+function StatusCard({ icon: Icon, label, count, status }: { icon: React.ElementType; label: string; count: number; status: "critical" | "warning" | "success" }) {
   const styles = {
     critical: { bg: "bg-critical/10", text: "text-critical", ring: "ring-critical/20" },
     warning: { bg: "bg-warning/10", text: "text-warning", ring: "ring-warning/20" },
@@ -255,14 +303,14 @@ function StatusCard({ icon: Icon, label, count, status }: { icon: any; label: st
   };
   const s = styles[status];
   return (
-    <Card className={`ring-1 ${s.ring}`}>
+    <Card className={`ring-1 transition-all duration-200 hover:shadow-md ${s.ring}`}>
       <CardContent className="flex items-center gap-4 p-5">
-        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${s.bg} ${s.text}`}>
+        <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${s.bg} ${s.text}`}>
           <Icon className="h-5 w-5" />
         </div>
-        <div>
-          <p className="text-sm text-muted-foreground">{label}</p>
-          <p className={`text-2xl font-bold ${s.text}`}>{count}</p>
+        <div className="min-w-0">
+          <p className="text-sm font-medium text-muted-foreground">{label}</p>
+          <p className={`text-2xl font-bold tracking-tight ${s.text}`}>{count}</p>
         </div>
       </CardContent>
     </Card>

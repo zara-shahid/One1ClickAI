@@ -31,27 +31,42 @@ export default function UploadHistory() {
     else { toast({ title: "Deleted" }); load(); }
   };
 
-  if (loading) return <div className="flex items-center justify-center py-20 text-muted-foreground">Loading...</div>;
+  if (loading) {
+    return (
+      <div className="space-y-6 animate-in-fade">
+        <div className="h-10 w-56 rounded-lg bg-muted animate-pulse" />
+        <div className="h-64 rounded-xl border bg-card animate-pulse" />
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Upload History</h1>
-        <p className="text-muted-foreground">View and manage your past data uploads</p>
+    <div className="space-y-6 animate-in-fade">
+      <div className="border-b border-border/60 pb-6">
+        <h1 className="text-2xl font-bold tracking-tight">Upload History</h1>
+        <p className="mt-0.5 text-muted-foreground">View and manage your past data uploads</p>
       </div>
 
       {uploads.length === 0 ? (
-        <Card>
-          <CardContent className="flex flex-col items-center justify-center py-16 text-center">
-            <History className="mb-4 h-12 w-12 text-muted-foreground/40" />
-            <h3 className="text-lg font-semibold">No uploads yet</h3>
-            <p className="mt-1 text-sm text-muted-foreground">Your upload history will appear here</p>
+        <Card className="overflow-hidden border-dashed">
+          <CardContent className="flex flex-col items-center justify-center py-20 text-center">
+            <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <History className="h-10 w-10" />
+            </div>
+            <h3 className="text-xl font-semibold">No uploads yet</h3>
+            <p className="mt-2 max-w-sm text-sm text-muted-foreground">Your upload history will appear here after you import a CSV.</p>
+            <Button className="mt-6 rounded-lg" asChild>
+              <a href="/upload">Upload data</a>
+            </Button>
           </CardContent>
         </Card>
       ) : (
-        <Card>
-          <CardHeader><CardTitle className="text-base">Past Uploads</CardTitle></CardHeader>
+        <Card className="overflow-hidden">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base font-semibold">Past Uploads</CardTitle>
+          </CardHeader>
           <CardContent>
+            <div className="rounded-xl border overflow-hidden">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -76,6 +91,7 @@ export default function UploadHistory() {
                 ))}
               </TableBody>
             </Table>
+            </div>
           </CardContent>
         </Card>
       )}
